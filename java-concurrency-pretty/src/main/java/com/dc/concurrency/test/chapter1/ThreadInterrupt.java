@@ -35,6 +35,5 @@ public class ThreadInterrupt {
         thread1.start();
         TimeUnit.SECONDS.sleep(1);
         thread1.interrupt();
-
     }
 }
