@@ -14,13 +14,17 @@ package com.dc.concurrency.test.chapter1;
  * 之后每次调用get或者set方法的时候,都会访问当前线程的ThreadLocalMap变量,然后进行对应的操作
  * 之所以使用ThreadLocalMap是因为每个线程都有自己的ThreadLocalMap,所以不会出现线程安全问题
  *
+ * 具体请查看get() set() remove()源码
+ *
+ *
  * get()实现:
  * 1. 获取当前线程
  * 2. 根据当前线程去获取对应额度线程变量
  * 3. 当获取到为空的时候进行创建 createMap(t, value);
  *
- */
-public class ThreadLocalTest {
+ * 优点: 每个线程有独立的备份,但是不支持继承
+ *
+ */public class ThreadLocalTest {
 
     static void print(){
         System.out.println(threadLocal.get());

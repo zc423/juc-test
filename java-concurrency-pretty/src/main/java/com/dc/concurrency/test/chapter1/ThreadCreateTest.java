@@ -59,6 +59,7 @@ public class ThreadCreateTest {
         // 实现callable测试
         FutureTask<String> futureTask = new FutureTask<>(new ImplementCallable());
         new Thread(futureTask).start();
+
         String s = null;
         try {
             s = futureTask.get();
