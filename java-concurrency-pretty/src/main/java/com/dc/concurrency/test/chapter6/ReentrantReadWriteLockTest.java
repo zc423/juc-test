@@ -13,6 +13,8 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  * 读写锁的读锁和写锁都是通过AQS的state变量来控制的,读锁的state的高16位表示读锁的数量,低16位表示写锁的数量
  *
  * 读写操作可以由两个不同的线程执行
+ *
+ * 读锁是共享锁,写锁是排他锁
  */
 public class ReentrantReadWriteLockTest {
 
@@ -22,16 +24,21 @@ public class ReentrantReadWriteLockTest {
         // 读锁
         ReentrantReadWriteLock.ReadLock readLock = reentrantReadWriteLock.readLock();
         /**
+         * 判断是否有写锁,有则阻塞
+         * 如果没有写锁,state高16位+1,判断是否超出可重入次数,超出则抛出异常,然后返回true
+         */
+        readLock.lock();
+        readLock.unlock();
+
+        ReentrantReadWriteLock.WriteLock writeLock = reentrantReadWriteLock.writeLock();
+        /**
          * 读锁的获取与释放
          * 读锁的获取与释放与ReentrantLock的获取与释放一样,都是通过AQS的acquire和release方法来实现的
          * 先判断32位的state是不是等于0
          * 如果不等于0 那么把1左移16位-1得到b
          * 然后结果 a&b 得出低16位是否有数
          */
-        readLock.lock();
-        readLock.unlock();
-
-//        reentrantReadWriteLock.writeLock().lock();
-        System.out.println(Integer.toBinaryString((1 << 16) - 1));
+        writeLock.lock();
+        writeLock.unlock();
     }
 }
