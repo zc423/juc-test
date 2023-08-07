@@ -17,6 +17,12 @@ import java.util.List;
  * 2. 对观察者进行抽象,拥有更新方法
  * 3. 通知者添加观察者,在状态变更之后通知所有订阅的观察者
  */
+
+/**
+ * 实际应用可以参考
+ * @see java.util.Observable
+ * @see java.util.Observer
+ */
 public class ObserveTest {
 
     public static void main(String[] args) {
